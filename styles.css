@@ -42,7 +42,7 @@ i {
     font-style: italic;
 }
 
-/*Link animation*/
+/*Easy Link animation*/
 .link {
     border-bottom: solid 1px white;
     transition-duration: 0.5s;
@@ -449,6 +449,18 @@ i {
     display: none;
 }
 
+.active-link::before {
+    content: '';
+    position: absolute;
+    background-color: var(--color-grey);
+    border-top-left-radius: 12%;
+    border-top-right-radius: 12%;
+    height: 78%;
+    width: 3.5%;
+    z-index: -1;
+    transition-duration: 1s;
+}
+
 /*map*/
 .chief-map {
     display: grid;
@@ -472,14 +484,36 @@ i {
 .chief-map__map__header__right {
 }
 .chief-map__map__map-frame {
-
+}
+#yandexmap {
+    margin-inline: 2% 2%;
+    height: 400px;
+    width: 96%;
+}
+#lazy-loading {
+    position: absolute;
+    width: 5%;
+    margin-left: 45%;
+    margin-top: 10%;
+    animation-name: rotate-lazy-loading;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+@keyframes rotate-lazy-loading {
+    0% {
+        transform: rotate(0deg);;
+    }
+    100% {
+        transform: rotate(360deg);;
+    }
 }
 
 /*time*/
 .chief-time {
     display: grid;
     grid-template-columns: [fir-time] auto [sec-time] 95.6% [third-time] auto [fourth-time];
-    grid-template-rows: 65%;
+    grid-template-rows: 50%;
     padding-top: 32px;
     background-color: var(--color-bg);
     height: 82.5vh;
@@ -498,4 +532,16 @@ i {
 .chief-time__timer__header__right {
 }
 .chief-time__timer__timer-frame {
+    margin-inline: 10px;
+    display: flex;
+    gap:10px;
+}
+.chief-time__timer__timer-frame button {
+    background-color: var(--color-grey);
+    border: solid 2px var(--color-grey);
+    border-radius: 10% / 25%;
+    padding-inline: 0.5%;
+}
+#display-timer {
+    display: flex;
 }

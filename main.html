@@ -6,12 +6,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <title>Base Frontend Stages</title>
+    <script src="https://api-maps.yandex.ru/v3/?apikey=46629785-5d1e-4b91-a236-34577b8f9dda&lang=ru_RU"></script>
 </head>
 <body>
     <nav class="navigation">
         <section class="navigation__info">
             <article class="navigation__info__backspace">
-                <a> <img class="navigation__info__backspace__stroke" src="icons/navigation info/Back Stroke.svg" alt="Back to"/> </a>
+                <a href="#"> <img class="navigation__info__backspace__stroke" src="icons/navigation info/Back Stroke.svg" alt="Back to"/> </a>
                 <div><b>User page</b> - Profile</div>
             </article>
             <article class="navigation__info__stats">
@@ -31,15 +32,15 @@
         </section>
         <section class="navigation__links">
             <article class="navigation__links__major">
-                <a class="navigation__links__major__item link" id="Activity" href="#activity">
+                <a class="navigation__links__major__item" href="#activity" id='link-of-activity'>
                     <img src="icons/navigation links/major/Activity.svg"/>
                     <div>Activity</div>
                 </a>
-                <a class="navigation__links__major__item link" id="Map" href="#map">
+                <a class="navigation__links__major__item" href="#map" id='link-of-map'>
                     <img src="icons/navigation links/major/Map.svg"/>
                     <div>Map</div>
                 </a>
-                <a class="navigation__links__major__item link" id="Time" href="#time">
+                <a class="navigation__links__major__item" href="#time" id="link-of-timer">
                     <img src="icons/navigation links/major/Time.svg"/>
                     <div>Time</div>
                 </a>
@@ -205,7 +206,9 @@
                     </div>
                 </article>
                 <article class="chief-map__map__map-frame">
-
+                    <div id="yandexmap">
+                        <img id="lazy-loading" src="./icons/map/Lazy Loading.svg"/>
+                    </div>
                 </article>
             </section>
         </main>
@@ -222,10 +225,17 @@
                     </div>
                 </article>
                 <article class="chief-time__timer__timer-frame">
-
+                    <div id="display-timer">
+                        <div class="display-timer__hour">00</div>
+                        <p>:</p>
+                        <div class="display-timer__minutes">00</div>
+                        <p>:</p>
+                        <div class="display-timer__seconds">00</div>
+                    </div>
                 </article>
             </section>
         </main>
     </main>
 </body>
+<script type="module" src="script.js"></script>
 </html>
