@@ -16,20 +16,20 @@ let active;
 let fl = true;
 
 function startTimer (time) {
-    time.seconds.textContent < 10 ? 
+    time.seconds.textContent < 9 ? 
         time.seconds.textContent = '0' + (+time.seconds.textContent + 1) : 
         time.seconds.textContent = +time.seconds.textContent + 1;
 
     if (time.seconds.textContent === "60") {
         time.seconds.textContent = '00';
-        time.minutes.textContent < 10 ? 
+        time.minutes.textContent < 9 ? 
             time.minutes.textContent = '0' + (+time.minutes.textContent + 1) : 
             time.minutes.textContent = +time.minutes.textContent + 1;
     }
 
     if (time.minutes.textContent === "60") {
         time.minutes.textContent = '00';
-        time.hour.textContent < 10 ? 
+        time.hour.textContent < 9 ? 
             time.hour.textContent = '0' + (+time.hour.textContent + 1) : 
             time.hour.textContent = +time.hour.textContent + 1;
     }
