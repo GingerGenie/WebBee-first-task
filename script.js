@@ -111,7 +111,6 @@ const yandexMap = document.getElementById('yandexmap'); // карта исчез
 let burgerFl = false;
 
 burgerButton.addEventListener('click', () => {
-    console.log(yandexMap)
     if (!burgerFl) {
         burgerButton.setAttribute('disabled', true);
         yandexMap.style.display = 'none';

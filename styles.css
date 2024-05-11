@@ -586,7 +586,13 @@ i {
     z-index: -1;
     transition-duration: 1s;
 }
+#attention {
+    display: none;
+}
 @media (max-width: 1200px) {
+    #attention {
+        display: block;
+    }
     .cheif__profile-stuff {
         display: none;
     }
