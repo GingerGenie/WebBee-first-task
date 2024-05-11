@@ -586,12 +586,10 @@ i {
     z-index: -1;
     transition-duration: 1s;
 }
-#attention {
-    display: none;
-}
 @media (max-width: 1200px) {
-    #attention {
-        display: block;
+    .navigation__links__minor__item__profile #attention {
+        position: absolute;
+        transform: translate(-150px, 10px);
     }
     .cheif__profile-stuff {
         display: none;
