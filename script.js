@@ -1,49 +1,60 @@
 import {initMap} from './yandex-map.js';
+import { startTimer, timerPieces } from './timer.js';
+
+let active = null; // Активная ссылка. Нужна, чтобы при новой ссылки удалить старую
+let fl = true;
+let mainFl = true;
+const link = window.location.href;
+const query = link.slice(link.search('#')+1, link.length); // Находит fragment в URL
+
+const classOfMainCont = document.querySelector('.container-main').classList;
+
+function activeButton (mainFlag, link, activeLink) {
+    if (mainFlag) {
+        classOfMainCont.add('display-none');
+        mainFlag = false;
+    }
+    activeLink?.classList.remove('active-link');
+    link.classList.add('active-link');
+    activeLink = link;
+
+    setTimeout(() => window.scrollTo(0,0), 0)
+
+    return [mainFlag, activeLink];
+}
 
 const linkMap = document.getElementById('link-of-map');
 const linkAct = document.getElementById('link-of-activity');
 const linkTimer = document.getElementById('link-of-timer');
+const linkBack = document.getElementById('link-back');
 
-let name = '';
-let listChildren = document.getElementById('display-timer').children;
-const timerPieces = {};
-for (let i = 0; i < listChildren.length ;i += 2) {
-    name = listChildren[i].className.slice(listChildren[i].className.search('__')+2, listChildren[i].className.length);
-    timerPieces[name] = listChildren[i];
-}
+linkBack.addEventListener('click', () => {
+    active?.classList.remove('active-link');
+    active = null;
+    classOfMainCont.remove('display-none');
+    mainFl = true;
+})
 
-let active;
-let fl = true;
+linkAct.addEventListener('click', (e) => {
+    [mainFl, active] = activeButton(mainFl, linkAct, active);
+})
+addEventListener('', (e) => e.preventDefault())
 
-function startTimer (time) {
-    time.seconds.textContent < 9 ? 
-        time.seconds.textContent = '0' + (+time.seconds.textContent + 1) : 
-        time.seconds.textContent = +time.seconds.textContent + 1;
+linkMap.addEventListener('click', () => {
+    [mainFl, active] = activeButton(mainFl, linkMap, active);
+})
 
-    if (time.seconds.textContent === "60") {
-        time.seconds.textContent = '00';
-        time.minutes.textContent < 9 ? 
-            time.minutes.textContent = '0' + (+time.minutes.textContent + 1) : 
-            time.minutes.textContent = +time.minutes.textContent + 1;
-    }
+linkTimer.addEventListener('click', () => {
+    [mainFl, active] = activeButton(mainFl, linkTimer, active);
+})
 
-    if (time.minutes.textContent === "60") {
-        time.minutes.textContent = '00';
-        time.hour.textContent < 9 ? 
-            time.hour.textContent = '0' + (+time.hour.textContent + 1) : 
-            time.hour.textContent = +time.hour.textContent + 1;
-    }
-
-    setTimeout(() => startTimer(time), 1000);
-}
-
+// Ивент запускается при загрузки сайта. Начинает таймер и правильно выделяет ссылку
 addEventListener('DOMContentLoaded', (e) => {
-    const link = window.location.href;
-    const query = link.slice(link.search('#')+1, link.length);
     if (!active && (query !== window.location.href)) {
-        
+        classOfMainCont.add('display-none');
         if (query=='map') {
             initMap();
+            setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000);
             linkMap.classList.add('active-link');
             active = linkMap;
             fl = false;
@@ -63,27 +74,50 @@ addEventListener('DOMContentLoaded', (e) => {
     startTimer(timerPieces);
 })
 
-linkMap.addEventListener('click', function (e) {
+// Вызывается ТОЛЬКО при первом посещении карты. Начинает загрузку
+linkMap.addEventListener('click', function (e) { 
     if (fl) {
         initMap();
     }
+    setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
 }, {once: true})
 
-linkAct.addEventListener('click', (e) => {
-    active?.classList.remove('active-link');
-    linkAct.classList.add('active-link');
-    active = linkAct;
-})
-addEventListener('', (e) => e.preventDefault())
+//Меню для профиля
+const profileButton = document.querySelector('.navigation__links__minor__profile');
+const profileMenu = document.querySelector('.navigation__profile-menu');
+let profileFl = false;
 
-linkMap.addEventListener('click', () => {
-    active?.classList.remove('active-link');
-    linkMap.classList.add('active-link');
-    active = linkMap;
+profileButton.addEventListener('click', () => {
+    if (!profileFl) {
+        profileMenu.classList.add('display-view')
+        profileFl = true;
+    }
+    else {
+        profileMenu.classList.remove('display-view')
+        profileFl = false;
+    }
 })
 
-linkTimer.addEventListener('click', () => {
-    active?.classList.remove('active-link');
-    linkTimer.classList.add('active-link');
-    active = linkTimer;
+const burgerButton = document.querySelector('.mobile-navigation__info__burger-menu');
+const burgerMenu = document.querySelector('.wrap-for-mobile-burger');
+let burgerFl = false;
+
+burgerButton.addEventListener('click', () => {
+    
+    if (!burgerFl) {
+        burgerButton.setAttribute('disabled', true);
+        burgerMenu.style.display = 'flex'; // flex
+        burgerMenu.style.animationName = 'burger-animation';
+        burgerFl = true;
+        setTimeout(() => burgerButton.removeAttribute("disabled"), 1000);
+    }
+    else {
+        burgerButton.setAttribute('disabled', true);
+        burgerMenu.style.animationName = 'burger-animation-reverse';
+        setTimeout(() => {
+            burgerMenu.style.display = 'none';
+            burgerButton.removeAttribute("disabled");
+        }, 900)
+        burgerFl = false;
+    }
 })
