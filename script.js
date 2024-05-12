@@ -1,13 +1,22 @@
 import { initMap } from './js/yandex-map.js';
 import { startTimer, getTimer } from './js/timer.js';
+import objPages from './js/pages.js';
 
 startTimer();
 
 const root = document.getElementById('root');
 const activeButtons = document.querySelectorAll('.active-button');
+let classActiveButton = null;
+let disabledButton = null;
 
 for (let button of activeButtons) { // создает ивент для каждой кликабельной ссылки
     button.addEventListener('click', async (e) => {
+        if (disabledButton === button) return;
+        button.classList.add('active-link');
+        disabledButton = button;
+        classActiveButton?.classList.remove('active-link');
+        classActiveButton = button;
+
         const link = button.dataset.redirect;
         e.preventDefault();
 
@@ -39,8 +48,18 @@ addEventListener('DOMContentLoaded', async () => {
         setTimeout(initMap, 50)
         setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
     }
-    const response = await fetch('/' + fragment + '/' + fragment + '.txt');
-    const textOfHTML = await response.text();
-    root.innerHTML = textOfHTML;
+    else if (fragment === 'timer') {
+        setTimeout(getTimer, 50);
+    }
+    
+    console.log(fragment)
+
+
+    const needButton = document.querySelector(`[data-redirect="${fragment}"]`);
+    needButton.classList.add('active-link');
+    disabledButton = needButton;
+    classActiveButton = needButton;
+
+    root.innerHTML = objPages[fragment];
     window.history.pushState({}, '', fragment);
 })
