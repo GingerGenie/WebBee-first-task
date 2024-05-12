@@ -23,13 +23,13 @@ profileButton.addEventListener('click', () => {
 // Меню бургер для мобилок
 const burgerButton = document.querySelector('.mobile-navigation__info__burger-menu');
 const burgerMenu = document.querySelector('.wrap-for-mobile-burger');
-const yandexMap = document.getElementById('yandexmap'); // карта исчезает т.к. есть коллизии у меню и картой
+//const yandexMap = document.getElementById('yandexmap'); // карта исчезает т.к. есть коллизии у меню и картой
 let burgerFl = false;
 
 burgerButton.addEventListener('click', () => {
     if (!burgerFl) {
         burgerButton.setAttribute('disabled', true);
-        yandexMap.style.display = 'none';
+        //yandexMap.style.display = 'none';
         burgerMenu.style.display = 'flex';
         burgerMenu.style.animationName = 'burger-animation';
         burgerFl = true;
@@ -39,7 +39,7 @@ burgerButton.addEventListener('click', () => {
         burgerButton.setAttribute('disabled', true);
         burgerMenu.style.animationName = 'burger-animation-reverse';
         setTimeout(() => {
-            yandexMap.style.display = 'block';
+            //yandexMap.style.display = 'block';
             burgerMenu.style.display = 'none';
             burgerButton.removeAttribute("disabled");
         }, 900)

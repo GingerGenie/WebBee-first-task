@@ -1,83 +1,46 @@
-import { initMap } from './yandex-map.js';
-import { startTimer } from './timer.js';
+import { initMap } from './js/yandex-map.js';
+import { startTimer, getTimer } from './js/timer.js';
 
-let active = null; // Активная ссылка. Нужна, чтобы при новой ссылки удалить старую
-let fl = true;
-let mainFl = true;
-const link = window.location.href;
-const query = link.slice(link.search('#')+1, link.length); // Находит fragment в URL
+startTimer();
 
-const classOfMainCont = document.querySelector('.container-main').classList;
+const root = document.getElementById('root');
+const activeButtons = document.querySelectorAll('.active-button');
 
-function activeButton (mainFlag, link, activeLink) {
-    if (mainFlag) {
-        classOfMainCont.add('display-none');
-        mainFlag = false;
-    }
-    activeLink?.classList.remove('active-link');
-    link.classList.add('active-link');
-    activeLink = link;
+for (let button of activeButtons) { // создает ивент для каждой кликабельной ссылки
+    button.addEventListener('click', async (e) => {
+        const link = button.dataset.redirect;
+        e.preventDefault();
 
-    setTimeout(() => window.scrollTo(0,0), 0)
-
-    return [mainFlag, activeLink];
+        window.history.pushState({}, '', link);
+        const response = await fetch(link + '/' + link + '.txt');
+        const textOfHTML = await response.text();
+        root.innerHTML = textOfHTML;
+    })
 }
 
-const linkMap = document.getElementById('link-of-map');
-const linkAct = document.getElementById('link-of-activity');
-const linkTimer = document.getElementById('link-of-timer');
-const linkBack = document.getElementById('link-back');
-
-linkBack.addEventListener('click', () => {
-    active?.classList.remove('active-link');
-    active = null;
-    classOfMainCont.remove('display-none');
-    mainFl = true;
-})
-
-linkAct.addEventListener('click', (e) => {
-    [mainFl, active] = activeButton(mainFl, linkAct, active);
-})
-addEventListener('', (e) => e.preventDefault())
-
-linkMap.addEventListener('click', () => {
-    [mainFl, active] = activeButton(mainFl, linkMap, active);
-})
-
-linkTimer.addEventListener('click', () => {
-    [mainFl, active] = activeButton(mainFl, linkTimer, active);
-})
-
-// Ивент запускается при загрузки сайта. Начинает таймер и правильно выделяет ссылку
-addEventListener('DOMContentLoaded', (e) => {
-    startTimer();
-    if (!active && (query !== window.location.href)) {
-        classOfMainCont.add('display-none');
-        if (query=='map') {
-            initMap();
-            setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000);
-            linkMap.classList.add('active-link');
-            active = linkMap;
-            fl = false;
-        }
-        else if (query=='activity') {
-            linkAct.classList.add('active-link');
-            active = linkAct;
-        }
-        else if (query=='time') {
-            linkTimer.classList.add('active-link');
-            active = linkTimer;
-        }
-        else {
-            window.location.href = window.location.href.replace(/[#]\w+/, '')
-        }
-    }
-})
-
-// Вызывается ТОЛЬКО при первом посещении карты. Начинает загрузку
-linkMap.addEventListener('click', function (e) { 
-    if (fl) {
-        initMap();
-    }
+activeButtons[1].addEventListener('click', function () { // ивент запуска карты
+    setTimeout(initMap, 50)
     setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
-}, {once: true})
+})
+
+activeButtons[2].addEventListener('click', () => { // ивент отображения таймера
+    setTimeout(getTimer, 50);
+})
+
+addEventListener('DOMContentLoaded', async () => {
+    let fragment = window.location.href.slice(
+        window.location.href.search('#') === -1 ? window.location.href.search('#') : window.location.href.search('#')+1
+        , window.location.href.length);
+    
+    if (fragment === '/') {
+        fragment = 'activity';
+    }
+    else if (fragment === 'map') {
+        setTimeout(initMap, 50)
+        setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
+    }
+    const response = await fetch('/' + fragment + '/' + fragment + '.txt');
+    const textOfHTML = await response.text();
+    root.innerHTML = textOfHTML;
+    window.history.pushState({}, '', fragment);
+})
