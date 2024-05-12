@@ -1,31 +1,32 @@
-let name = '';
-let listChildren = document.getElementById('display-timer').children;
-const timerPieces = {};
-for (let i = 0; i < listChildren.length ;i += 2) {
-    name = listChildren[i].className.slice(listChildren[i].className.search('__')+2, listChildren[i].className.length);
-    timerPieces[name] = listChildren[i];
+let listChildren = document.querySelectorAll('#display-timer div');
+
+function plus (elem, time) {
+    elem.textContent < 9 ? 
+        elem.textContent = '0' + (time) :
+        elem.textContent = time;
 }
 
-function startTimer (time) {
-    time.seconds.textContent < 9 ? 
-        time.seconds.textContent = '0' + (+time.seconds.textContent + 1) : 
-        time.seconds.textContent = +time.seconds.textContent + 1;
+let start = performance.now();
+let dif = 0;
+let checker = 0;
+let minusSec = 0;
+let minusMin = 0;
+export function startTimer () {
+    dif = (performance.now() - start) / 1000 | 0;
+    if (checker !== dif) {
+        checker = dif;
+        plus(listChildren[2], dif - minusSec);
 
-    if (time.seconds.textContent === "60") {
-        time.seconds.textContent = '00';
-        time.minutes.textContent < 9 ? 
-            time.minutes.textContent = '0' + (+time.minutes.textContent + 1) : 
-            time.minutes.textContent = +time.minutes.textContent + 1;
+        if (listChildren[2].textContent === '60') {
+            listChildren[2].textContent = '00';
+            minusSec += 60;
+            plus(listChildren[1], dif/60);
+        };
+
+        if (listChildren[1].textContent === '60') {
+            listChildren[1].textContent = '00';
+            minusMin += 60;
+            plus(listChildren[0], dif/60)};
     }
-
-    if (time.minutes.textContent === "60") {
-        time.minutes.textContent = '00';
-        time.hour.textContent < 9 ? 
-            time.hour.textContent = '0' + (+time.hour.textContent + 1) : 
-            time.hour.textContent = +time.hour.textContent + 1;
-    }
-
-    setTimeout(() => startTimer(time), 1000);
+    window.requestAnimationFrame(startTimer);
 }
-
-export {startTimer, timerPieces}
