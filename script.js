@@ -16,10 +16,10 @@ for (let button of activeButtons) { // создает ивент для кажд
         disabledButton = button;
         classActiveButton?.classList.remove('active-link');
         classActiveButton = button;
-
+        
         const link = button.dataset.redirect;
         e.preventDefault();
-        window.history.pushState({}, '','http://' +  window.location.host + '/' + link);
+        window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task/' + link);
         const response = await fetch(link + '/' + link + '.txt');
         const textOfHTML = await response.text();
         root.innerHTML = textOfHTML;
@@ -48,7 +48,7 @@ addEventListener('DOMContentLoaded', async () => {
         , fragment.length);
     if (fragment === '' || fragment == window.location.host) {
         fragment = 'activity';
-        window.history.pushState({}, '', 'http://localhost:5500/activity');
+        window.history.pushState({}, '', 'https://gingergenie.github.io/WebBee-first-task/activity');
     }
     else if (fragment === 'map') {
         setTimeout(initMap, 50)
@@ -68,19 +68,19 @@ addEventListener('DOMContentLoaded', async () => {
     classActiveButton = needButton;
 
     root.innerHTML = objPages[fragment];
-    window.history.pushState({}, '', 'http://' + window.location.host + '/' + fragment);
+    window.history.pushState({}, '', 'https://gingergenie.github.io/WebBee-first-task/' + fragment);
 })
 
 addEventListener('popstate', () => {
     let fragment = window.location.href;
     if (fragment[fragment.length-1] === '/') history.go(-1);
-    console.log(fragment);
+
     fragment = fragment.slice(
         fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) === -1 ? 
             fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) : 
             fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/)+1
         , fragment.length);
-    console.log(fragment + '::' + window.location.href)
+
     if (fragment === '' || fragment == window.location.host) {
         fragment = 'activity';
     }
