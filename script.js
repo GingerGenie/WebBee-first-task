@@ -61,5 +61,6 @@ addEventListener('DOMContentLoaded', async () => {
     classActiveButton = needButton;
 
     root.innerHTML = objPages[fragment];
+    
     window.history.pushState({}, '', fragment);
 })
