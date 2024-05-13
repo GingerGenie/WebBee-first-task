@@ -36,7 +36,7 @@ activeButtons[2].addEventListener('click', () => { // ивент отображ�
     setTimeout(() => {
         getResetButton();
         getTimer()
-    }, 50);
+    }, 200);
 })
 
 addEventListener('DOMContentLoaded', async () => {
