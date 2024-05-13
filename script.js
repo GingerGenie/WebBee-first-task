@@ -1,5 +1,5 @@
 import { initMap } from './js/yandex-map.js';
-import { startTimer, getTimer } from './js/timer.js';
+import { startTimer, getTimer, getResetButton } from './js/timer.js';
 import objPages from './js/pages.js';
 
 startTimer();
@@ -33,7 +33,10 @@ activeButtons[1].addEventListener('click', function () { // ивент запу�
 })
 
 activeButtons[2].addEventListener('click', () => { // ивент отображения таймера
-    setTimeout(getTimer, 50);
+    setTimeout(() => {
+        getResetButton();
+        getTimer()
+    }, 50);
 })
 
 addEventListener('DOMContentLoaded', async () => {
@@ -49,7 +52,10 @@ addEventListener('DOMContentLoaded', async () => {
         setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
     }
     else if (fragment === 'timer') {
-        setTimeout(getTimer, 50);
+        setTimeout(() => {
+            getResetButton();
+            getTimer()
+        }, 50);
     }
     
     console.log(fragment)

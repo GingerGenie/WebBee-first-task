@@ -4,7 +4,7 @@ function plus (elem, time) {
         elem.textContent = time;
 }
 
-const start = performance.now();
+let start = performance.now();
 let dif = 0; let checker = 0;
 let s = 0; let m = 0; let h = 0;
 export function startTimer () {
@@ -23,5 +23,14 @@ export function getTimer() {
     plus(listChildren[2], s | 0);
     plus(listChildren[1], m | 0);
     plus(listChildren[0], h | 0);
+    window.requestAnimationFrame(getTimer);
+}
+
+export function getResetButton() {
+    document.getElementById('reset-button').addEventListener('click', () => {
+        start = performance.now();
+        dif = 0; checker = 0;
+        s = 0; m = 0; h = 0;
+    })
     window.requestAnimationFrame(getTimer);
 }

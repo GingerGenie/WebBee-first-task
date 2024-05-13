@@ -151,7 +151,7 @@ export default {
                 <div class="chief-time__timer__header__left">Basic Timer</div>
                 <div class="chief-time__timer__header__right">
                     <img src="./icons/map/Arrow.svg"/>
-                    <img src="./icons/map/Update.svg"/>
+                    <img id="reset-button" src="./icons/map/Update.svg"/>
                     <img src="./icons/map/Close.svg"/>
                 </div>
             </article>
