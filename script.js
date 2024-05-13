@@ -42,9 +42,9 @@ addEventListener('DOMContentLoaded', async () => {
     let fragment = window.location.href;
     if (fragment[fragment.length-1] === '/') fragment = fragment.slice(0, -1);
     fragment = fragment.slice(
-        fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) === -1 ? 
-            fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) : 
-            fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/)+1
+        fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/) === -1 ? 
+            fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/) : 
+            fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/)+1
         , fragment.length);
     if (fragment === '' || fragment == "WebBee-first-task") {
         fragment = 'activity';
@@ -76,9 +76,9 @@ addEventListener('popstate', () => {
     if (fragment[fragment.length-1] === "WebBee-first-task") history.go(-1);
 
     fragment = fragment.slice(
-        fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) === -1 ? 
-            fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) : 
-            fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/)+1
+        fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/) === -1 ? 
+            fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/) : 
+            fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/)+1
         , fragment.length);
 
     if (fragment === '' || fragment == window.location.host) {
