@@ -11,15 +11,16 @@ let disabledButton = null;
 
 for (let button of activeButtons) { // создает ивент для каждой кликабельной ссылки
     button.addEventListener('click', async (e) => {
+        e.preventDefault();
+
         if (disabledButton === button) return;
         button.classList.add('active-link');
         disabledButton = button;
         classActiveButton?.classList.remove('active-link');
         classActiveButton = button;
         
-        const link = button.dataset.redirect;
-        e.preventDefault();
-        window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task/' + link);
+        const link = button.getAttribute('href');
+        window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task' + link);
         const response = await fetch(link + '/' + link + '.txt');
         const textOfHTML = await response.text();
         root.innerHTML = textOfHTML;
@@ -27,7 +28,7 @@ for (let button of activeButtons) { // создает ивент для кажд
 }
 
 activeButtons[1].addEventListener('click', function () { // ивент запуска карты
-    setTimeout(initMap, 50)
+    setTimeout(initMap, 200)
     setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
 })
 
@@ -61,7 +62,7 @@ addEventListener('DOMContentLoaded', async () => {
         }, 50);
     }
 
-    const needButton = document.querySelector(`[data-redirect="${fragment}"]`);
+    const needButton = document.querySelector(`[href="/${fragment}"]`);
     classActiveButton?.classList.remove('active-link');
     needButton.classList.add('active-link');
     disabledButton = needButton;
@@ -95,7 +96,7 @@ addEventListener('popstate', () => {
         }, 50);
     }
 
-    const needButton = document.querySelector(`[data-redirect="${fragment}"]`);
+    const needButton = document.querySelector(`[href="/${fragment}"]`);
     classActiveButton?.classList.remove('active-link');
     needButton.classList.add('active-link');
     disabledButton = needButton;
