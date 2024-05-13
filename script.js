@@ -19,7 +19,7 @@ for (let button of activeButtons) { // создает ивент для кажд
         classActiveButton?.classList.remove('active-link');
         classActiveButton = button;
         
-        const link = button.getAttribute('href');
+        let link = button.getAttribute('href');
         window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task' + link);
 
         link = link.slice(1)
