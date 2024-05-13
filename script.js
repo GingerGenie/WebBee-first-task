@@ -10,7 +10,7 @@ let classActiveButton = null;
 let disabledButton = null;
 
 for (let button of activeButtons) { // создает ивент для каждой кликабельной ссылки
-    button.addEventListener('click', async (e) => {
+    button.addEventListener('click', (e) => {
         e.preventDefault();
 
         if (disabledButton === button) return;
@@ -21,9 +21,8 @@ for (let button of activeButtons) { // создает ивент для кажд
         
         const link = button.getAttribute('href');
         window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task' + link);
-        const response = await fetch(link + '/' + link + '.txt');
-        const textOfHTML = await response.text();
-        root.innerHTML = textOfHTML;
+
+        root.innerHTML = objPages[link];
     })
 }
 
@@ -39,7 +38,7 @@ activeButtons[2].addEventListener('click', () => { // ивент отображ�
     }, 200);
 })
 
-addEventListener('DOMContentLoaded', async () => {
+addEventListener('DOMContentLoaded', () => {
     let fragment = window.location.href;
     if (fragment[fragment.length-1] === '/') fragment = fragment.slice(0, -1);
     fragment = fragment.slice(
