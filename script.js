@@ -46,7 +46,7 @@ addEventListener('DOMContentLoaded', async () => {
             fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) : 
             fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/)+1
         , fragment.length);
-    if (fragment === '' || fragment == window.location.host) {
+    if (fragment === '' || fragment == "WebBee-first-task") {
         fragment = 'activity';
         window.history.pushState({}, '', 'https://gingergenie.github.io/WebBee-first-task/activity');
     }
@@ -73,7 +73,7 @@ addEventListener('DOMContentLoaded', async () => {
 
 addEventListener('popstate', () => {
     let fragment = window.location.href;
-    if (fragment[fragment.length-1] === '/') history.go(-1);
+    if (fragment[fragment.length-1] === "WebBee-first-task") history.go(-1);
 
     fragment = fragment.slice(
         fragment.search(/[\/](?![:0-9A-Za-z#_.]*[\/])/) === -1 ? 
