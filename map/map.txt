@@ -1,4 +1,4 @@
-<main class="container-map" id="map">
+<main class="container-map">
     <main class="chief-map">
         <section class="chief-map__map">
             <article class="chief-map__map__header">

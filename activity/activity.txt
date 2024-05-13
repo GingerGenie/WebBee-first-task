@@ -1,4 +1,4 @@
-<main class="container-activity" id="activity">
+<main class="container-activity">
     <main class="cheif">
             <section class="cheif__news-feed">
                 <article class="cheif__news-feed__post-open">

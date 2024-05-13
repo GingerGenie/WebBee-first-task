@@ -1,5 +1,5 @@
 export default {
-    activity: `<main class="container-activity" id="activity">
+    activity: `<main class="container-activity">
     <main class="cheif">
             <section class="cheif__news-feed">
                 <article class="cheif__news-feed__post-open">
@@ -125,7 +125,7 @@ export default {
             </section>
     </main>
 </main>`,
-    map: `<main class="container-map" id="map">
+    map: `<main class="container-map">
     <main class="chief-map">
         <section class="chief-map__map">
             <article class="chief-map__map__header">
@@ -144,7 +144,7 @@ export default {
         </section>
     </main>
 </main>`,
-    timer: `<main class="container-time" id="time">
+    timer: `<main class="container-time">
     <main class="chief-time">
         <section class="chief-time__timer">
             <article class="chief-time__timer__header">

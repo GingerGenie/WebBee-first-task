@@ -1,4 +1,4 @@
-<main class="container-time" id="time">
+<main class="container-time">
     <main class="chief-time">
         <section class="chief-time__timer">
             <article class="chief-time__timer__header">
