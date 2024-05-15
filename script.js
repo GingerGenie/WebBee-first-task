@@ -1,5 +1,5 @@
 import { initMap } from './js/yandex-map.js';
-import { startTimer, getTimer, getResetButton } from './js/timer.js';
+import { startTimer, getResetButton } from './js/timer.js';
 import objPages from './js/pages.js';
 
 startTimer();
@@ -20,24 +20,29 @@ for (let button of activeButtons) { // создает ивент для кажд
         classActiveButton = button;
         
         let link = button.getAttribute('href');
-        window.history.pushState({}, '','https://gingergenie.github.io/WebBee-first-task' + link);
+        window.history.pushState({}, '','https://' + 'gingergenie.github.io/WebBee-first-task' + link);
 
         link = link.slice(1)
-        root.innerHTML = objPages[link];
+        root.innerHTML = objPages[link]['html'];
     })
 }
 
 activeButtons[1].addEventListener('click', function () { // ивент запуска карты
-    setTimeout(initMap, 200)
-    setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
+    initMap();
+    setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000);
 })
 
-activeButtons[2].addEventListener('click', () => { // ивент отображения таймера
-    setTimeout(() => {
-        getTimer()
-        getResetButton();
-    }, 200);
-})
+function timerFunc () { // ивент отображения таймера
+    const {seconds, minutes, hours} = objPages['timer']['state'];
+    const listTimerChildren = document.querySelectorAll('#display-timer div');
+    listTimerChildren[0].textContent = hours || '00';
+    listTimerChildren[1].textContent = minutes || '00';
+    listTimerChildren[2].textContent = seconds || '00';
+    getResetButton();
+    window.requestAnimationFrame(timerFunc);
+}
+
+activeButtons[2].addEventListener('click', timerFunc)
 
 addEventListener('DOMContentLoaded', () => {
     let fragment = window.location.href;
@@ -47,19 +52,19 @@ addEventListener('DOMContentLoaded', () => {
             fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/) : 
             fragment.search(/[\/](?![:0-9A-Za-z#_.-]*[\/])/)+1
         , fragment.length);
-    if (fragment === '' || fragment == "WebBee-first-task") {
+
+    if (fragment === '' || fragment == "WebBee-first-task") { // WebBee-first-task
         fragment = 'activity';
-        window.history.pushState({}, '', 'https://gingergenie.github.io/WebBee-first-task/activity');
+        window.location = 'https://gingergenie.github.io/WebBee-first-task' + '/activity';
+        root.innerHTML = objPages[fragment]['html'];
     }
-    else if (fragment === 'map') {
-        setTimeout(initMap, 50)
-        setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000)
+
+    if (fragment === 'map') {
+        initMap();
+        setTimeout(() => document.getElementById('lazy-loading').classList.add('display-none'),10000);
     }
-    else if (fragment === 'timer') {
-        setTimeout(() => {
-            getTimer();
-            getResetButton();
-        }, 50);
+    if (fragment === 'timer') {
+        timerFunc();
     }
 
     const needButton = document.querySelector(`[href="/${fragment}"]`);
@@ -67,9 +72,6 @@ addEventListener('DOMContentLoaded', () => {
     needButton.classList.add('active-link');
     disabledButton = needButton;
     classActiveButton = needButton;
-
-    root.innerHTML = objPages[fragment];
-    window.history.pushState({}, '', 'https://gingergenie.github.io/WebBee-first-task/' + fragment);
 })
 
 addEventListener('popstate', () => {

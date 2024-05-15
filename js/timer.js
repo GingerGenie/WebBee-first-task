@@ -1,36 +1,30 @@
-function plus (elem, time) {
-    elem.textContent <= 9 ? 
-        elem.textContent = '0' + (time) :
-        elem.textContent = time;
-}
+import objPages from './pages.js';
 
 let start = performance.now();
-let dif = 0; let checker = 0;
-let s = 0; let m = 0; let h = 0;
 export function startTimer () {
-    dif = (performance.now() - start) / 1000 | 0;
-    if (checker !== dif) {
-        checker += 1;
-        s = dif % 60;
-        m = dif/60 % 60;
-        h = dif/3600 % 60;
-    }
-    window.requestAnimationFrame(startTimer);
-}
+    let dif = (performance.now() - start) / 1000 | 0;
+    objPages['timer']['state']['seconds'] = dif % 60 <= 9 ?
+        '0' + (dif % 60) : 
+        dif % 60;
 
-export function getTimer() {
-    const listChildren = document.querySelectorAll('#display-timer div');
-    plus(listChildren[2], s | 0);
-    plus(listChildren[1], m | 0);
-    plus(listChildren[0], h | 0);
-    window.requestAnimationFrame(getTimer);
+    if (objPages['timer']['state']['seconds'] === 59) 
+        objPages['timer']['state']['minutes'] = (dif+1)/60 % 60 <= 9 ?
+            '0' + ((dif+1)/60 % 60) :
+            (dif+1)/60 % 60;
+
+    if (objPages['timer']['state']['minutes'] === 59) 
+        objPages['timer']['state']['hours'] = (dif+1)/3600 <= 9 ?
+            '0' + ((dif+1)/3600) :
+            (dif+1)/3600;
+
+    window.requestAnimationFrame(startTimer);
 }
 
 export function getResetButton() {
     document.getElementById('reset-button').addEventListener('click', () => {
         start = performance.now();
-        dif = 0; checker = 0;
-        s = 0; m = 0; h = 0;
+        objPages['timer']['state']['seconds'] = 0;
+        objPages['timer']['state']['minutes'] = 0;
+        objPages['timer']['state']['hours'] = 0;
     })
-    window.requestAnimationFrame(getTimer);
 }
