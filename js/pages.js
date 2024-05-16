@@ -1,4 +1,11 @@
+import { timerFunc } from "./timer.js";
+import { initMap } from "./yandex-map.js";
+
 export default {
+    buttons: {
+        classActiveButton: undefined,
+        disabledButton: undefined,
+    },
     activity: {
         html: `    <main id="root">
         <main class="container-activity">
@@ -12,7 +19,7 @@ export default {
                                     <img src="./icons/post of news feed/header/Arrow.svg"/>
                                 </div>
                             </article>
-                            <img class="cheif__news-feed__post__photo" src="./src/p./sunset.jpg">
+                            <img class="cheif__news-feed__post__photo" src="./src/pic/sunset.jpg">
                             <article class="cheif__news-feed__post__last-comment">
                                 <div class="cheif__news-feed__post__last-comment__header">
                                     <img src="./icons/post of news feed/Comment.svg"/>
@@ -128,7 +135,9 @@ export default {
             </main>
         </main>
     </main>`,
-        state: {},
+        state: {
+            init: function () {}
+        },
     },
     map: {
         html: `    <main id="root">
@@ -152,7 +161,9 @@ export default {
             </main>
         </main>
     </main>`,
-        state: {},
+        state: {
+            init: initMap
+        },
     },
     timer: {
         html: `    <main id="root">
@@ -180,6 +191,8 @@ export default {
             </main>
         </main>
     </main>`,
-        state: {},
+        state: {
+            init: timerFunc
+        },
     },
 }
