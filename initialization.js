@@ -34,5 +34,5 @@ function initPage(dispatch) {
     objPages.disabledButton = needButton;
 }
 
-addEventListener('DOMContentLoaded', initPage.call(null, 'openPage'))
-addEventListener('popstate', initPage.call(null, 'popstate'))
+addEventListener('DOMContentLoaded', () => initPage('openPage'))
+addEventListener('popstate', () => initPage('popstate'))
