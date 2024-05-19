@@ -26,6 +26,7 @@ export function startTimer () {
 export function getResetButton() {
     document.getElementById('reset-button').addEventListener('click', () => {
         start = performance.now();
+        check = 0;
         objPages['timer']['state']['seconds'] = 0;
         objPages['timer']['state']['minutes'] = 0;
         objPages['timer']['state']['hours'] = 0;
@@ -38,6 +39,7 @@ export function timerFunc () { // ивент отображения таймер
     listTimerChildren[0].textContent = hours || '00';
     listTimerChildren[1].textContent = minutes || '00';
     listTimerChildren[2].textContent = seconds || '00';
+    
     getResetButton();
     window.requestAnimationFrame(timerFunc);
 }
