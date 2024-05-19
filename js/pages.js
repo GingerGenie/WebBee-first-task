@@ -3,7 +3,6 @@ import { initMap } from "./yandex-map.js";
 
 export default {
     buttons: {
-        classActiveButton: undefined,
         disabledButton: undefined,
     },
     activity: {
