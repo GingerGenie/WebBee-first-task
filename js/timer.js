@@ -13,11 +13,11 @@ export function startTimer () {
     
         objPages['timer']['state']['minutes'] = dif/60 % 60 <= 9 ?
             '0' + ((dif/60 % 60) | 0) :
-            dif/60 % 60;
+            (dif/60 % 60) | 0;
     
         objPages['timer']['state']['hours'] = dif/3600 <= 9 ?
             '0' + ((dif/3600) | 0) :
-            dif/3600;
+            (dif/3600) | 0;
     }
 
     window.requestAnimationFrame(startTimer);
