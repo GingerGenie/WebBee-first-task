@@ -11,11 +11,11 @@ export function startTimer () {
             '0' + (dif % 60) : 
             dif % 60;
     
-        objPages['timer']['state']['minutes'] = dif/60 % 60 <= 9 ?
+        objPages['timer']['state']['minutes'] = Math.floor(dif/60) % 60 <= 9 ?
             '0' + ((dif/60 % 60) | 0) :
             (dif/60 % 60) | 0;
     
-        objPages['timer']['state']['hours'] = dif/3600 <= 9 ?
+        objPages['timer']['state']['hours'] = Math.floor(dif/3600) <= 9 ?
             '0' + ((dif/3600) | 0) :
             (dif/3600) | 0;
     }
