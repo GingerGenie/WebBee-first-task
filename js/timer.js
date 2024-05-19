@@ -1,9 +1,12 @@
 import objPages from './pages.js';
 
 let start = performance.now();
+let check = 0;
 export function startTimer () {
     let dif = (performance.now() - start) / 1000 | 0;
-    if (objPages['timer']['state']['seconds'] != dif) {
+    if (check != dif) {
+        check += 1;
+        
         objPages['timer']['state']['seconds'] = dif % 60 <= 9 ?
             '0' + (dif % 60) : 
             dif % 60;
