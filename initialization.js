@@ -23,7 +23,6 @@ addEventListener('DOMContentLoaded', () => {
     const needButton = document.querySelector(`[href="/${fragment}"]`);
     needButton.classList.add('active-link');
     objPages.disabledButton = needButton;
-    objPages.classActiveButton = needButton;
 })
 
 
@@ -45,9 +44,7 @@ addEventListener('popstate', () => {
     }
 
     const needButton = document.querySelector(`[href="/${fragment}"]`);
-    objPages.classActiveButton?.classList.remove('active-link');
-
+    objPages.disabledButton?.classList.remove('active-link');
     needButton.classList.add('active-link');
     objPages.disabledButton = needButton;
-    objPages.classActiveButton = needButton;
 })
