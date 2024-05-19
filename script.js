@@ -12,9 +12,8 @@ for (let button of activeButtons) { // создает ивент для кажд
 
         if (objPages.disabledButton === button) return;
         button.classList.add('active-link');
+        objPages.disabledButton?.classList.remove('active-link');
         objPages.disabledButton = button;
-        objPages.classActiveButton?.classList.remove('active-link');
-        objPages.classActiveButton = button;
         
         let link = button.getAttribute('href');
         window.history.pushState({}, '','https://' + 'gingergenie.github.io/WebBee-first-task' + link);
