@@ -3,17 +3,19 @@ import objPages from './pages.js';
 let start = performance.now();
 export function startTimer () {
     let dif = (performance.now() - start) / 1000 | 0;
-    objPages['timer']['state']['seconds'] = dif % 60 <= 9 ?
-        '0' + (dif % 60) : 
-        dif % 60;
-
-    objPages['timer']['state']['minutes'] = dif/60 % 60 <= 9 ?
-        '0' + ((dif/60 % 60) | 0) :
-        dif/60 % 60;
-
-    objPages['timer']['state']['hours'] = dif/3600 <= 9 ?
-        '0' + ((dif/3600) | 0) :
-        dif/3600;
+    if (objPages['timer']['state']['seconds'] != dif) {
+        objPages['timer']['state']['seconds'] = dif % 60 <= 9 ?
+            '0' + (dif % 60) : 
+            dif % 60;
+    
+        objPages['timer']['state']['minutes'] = dif/60 % 60 <= 9 ?
+            '0' + ((dif/60 % 60) | 0) :
+            dif/60 % 60;
+    
+        objPages['timer']['state']['hours'] = dif/3600 <= 9 ?
+            '0' + ((dif/3600) | 0) :
+            dif/3600;
+    }
 
     window.requestAnimationFrame(startTimer);
 }
