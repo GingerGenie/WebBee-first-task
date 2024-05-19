@@ -21,7 +21,7 @@ function initPage(dispatch) {
                 root.innerHTML = objPages[fragment]['html'];
                 break;
             case 'popstate':
-                history.back();
+                history.go(-2);
                 break;
         }
     }
