@@ -1,0 +1,23 @@
+<main class="container-time">
+    <main class="chief-time">
+        <section class="chief-time__timer">
+            <article class="chief-time__timer__header">
+                <div class="chief-time__timer__header__left">Basic Timer</div>
+                <div class="chief-time__timer__header__right">
+                    <img src="./icons/map/Arrow.svg"/>
+                    <img id="reset-button" src="./icons/map/Update.svg"/>
+                    <img src="./icons/map/Close.svg"/>
+                </div>
+            </article>
+            <article class="chief-time__timer__timer-frame">
+                <div id="display-timer">
+                    <div class="display-timer__hour">00</div>
+                    <p>:</p>
+                    <div class="display-timer__minutes">00</div>
+                    <p>:</p>
+                    <div class="display-timer__seconds">00</div>
+                </div>
+            </article>
+        </section>
+    </main>
+</main>

@@ -1,0 +1,19 @@
+<main class="container-map">
+    <main class="chief-map">
+        <section class="chief-map__map">
+            <article class="chief-map__map__header">
+                <div class="chief-map__map__header__left">Basic Map</div>
+                <div class="chief-map__map__header__right">
+                    <img src="./icons/map/Arrow.svg"/>
+                    <img src="./icons/map/Update.svg"/>
+                    <img src="./icons/map/Close.svg"/>
+                </div>
+            </article>
+            <article class="chief-map__map__map-frame">
+                <div id="yandexmap">
+                    <img id="lazy-loading" src="./icons/map/Lazy Loading.svg"/>
+                </div>
+            </article>
+        </section>
+    </main>
+</main>

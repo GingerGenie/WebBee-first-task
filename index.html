@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <title>Base Frontend Stages</title>
+    <script src="https://api-maps.yandex.ru/v3/?apikey=46629785-5d1e-4b91-a236-34577b8f9dda&lang=ru_RU"></script>
+</head>
+<body>
+    <style>
+        .ymaps3x0--controls{
+            z-index: 1;
+        }
+    </style>
+    <nav class="navigation">
+        <section class="navigation__info">
+            <article class="navigation__info__backspace">
+                <a> <img class="navigation__info__backspace__stroke" src="icons/navigation info/Back Stroke.svg" alt="Back to"/> </a>
+                <div><b>User page</b> - Profile</div>
+            </article>
+            <article class="navigation__info__stats">
+                <a class="navigation__info__stats__item link">
+                    <img src="icons/navigation info/Statistics.svg"/>
+                    <div>Statistics</div>
+                </a>
+                <a class="navigation__info__stats__item link">
+                    <img src="icons/navigation info/Invoices.svg"/>
+                    <div>Invoices</div>
+                </a>
+                <a class="navigation__info__stats__item link">
+                    <img src="icons/navigation info/Shedule.svg"/>
+                    <div>Shedule</div>
+                </a>
+            </article>
+            <button class="mobile-navigation__info__burger-menu"></button>
+            <section class="wrap-for-mobile-burger">
+                <div class="mobile-navigation__info__burger-menu__major">
+                    <a class="mobile-navigation__info__burger-menu__major__item">
+                        <img src="icons/navigation links/minor/Notes.svg"/>
+                        <div>Notes</div>
+                    </a>
+                    <a class="mobile-navigation__info__burger-menu__major__item">
+                        <img src="icons/navigation links/minor/Photo.svg"/>
+                        <div>Photos</div>
+                    </a>
+                </div>
+                <div class="mobile-navigation__info__burger-menu__profile-major">
+                    <div class="cheif__profile-stuff__navigation-profile__major">
+                        <div class="cheif__profile-stuff__navigation-profile__major__item">
+                            <img src="icons/profile section/navigation block/Profile.svg"/>
+                            <div>My Profile</div>
+                        </div>
+                        <div class="cheif__profile-stuff__navigation-profile__major__balance">
+                            <div class="cheif__profile-stuff__navigation-profile__major__balance__left">
+                                <img src="icons/profile section/navigation block/Balance.svg"/>
+                                <div>Balance</div>
+                            </div>
+                            <p>$ 1,430</p>
+                        </div>
+                        <div class="cheif__profile-stuff__navigation-profile__major__connections">
+                            <div class="cheif__profile-stuff__navigation-profile__major__balance__left">
+                                <img src="icons/profile section/navigation block/Connections.svg"/>
+                                <div>Connections</div>
+                            </div>
+                            <p>29</p>
+                        </div>
+                        <div class="cheif__profile-stuff__navigation-profile__major__item">
+                            <img src="icons/profile section/navigation block/Friends.svg"/>
+                            <div>Friends</div>
+                        </div>
+                </div>
+                <div class="mobile-navigation__info__burger-menu__profile-minor">
+                    <div class="cheif__profile-stuff__navigation-profile__minor__events">
+                        <div class="cheif__profile-stuff__navigation-profile__minor__events__left">
+                            <img src="icons/profile section/navigation block/Calendar.svg"/>
+                            <div>Events</div>
+                        </div>
+                        <p>45</p>
+                    </div>
+                    <div class="cheif__profile-stuff__navigation-profile__minor__item">
+                        <img src="icons/profile section/navigation block/Settings.svg"/>
+                        <div>Account settings</div>
+                    </div>
+                </div>
+                <div class="mobile-navigation__info__burger-menu__stats">
+                    <a>
+                        <img src="icons/navigation info/Statistics.svg"/>
+                        <div>Statistics</div>
+                    </a>
+                    <a>
+                        <img src="icons/navigation info/Invoices.svg"/>
+                        <div>Invoices</div>
+                    </a>
+                    <a>
+                        <img src="icons/navigation info/Shedule.svg"/>
+                        <div>Shedule</div>
+                    </a>
+                </div>
+            </section>
+        </section>
+        <section class="navigation__links">
+            <article class="navigation__links__major">
+                <a class="navigation__links__major__item active-button" href="/activity">
+                    <img src="icons/navigation links/major/Activity.svg"/>
+                    <div>Activity</div>
+                </a>
+                <a class="navigation__links__major__item active-button" href="/map">
+                    <img src="icons/navigation links/major/Map.svg"/>
+                    <div>Map</div>
+                </a>
+                <a class="navigation__links__major__item active-button" href="/timer">
+                    <img src="icons/navigation links/major/Time.svg"/>
+                    <div>Time</div>
+                </a>
+            </article>
+            <article class="navigation__links__minor">
+                <a class="navigation__links__minor__item__profile navigation__links__minor__item navigation__links__minor__profile">
+                    <p id="attention">Рабочая кнопка! -></p>
+                    <img src="icons/profile section/navigation block/Profile.svg"/>
+                    <div>Profile</div>
+                </a>
+                <a class="navigation__links__minor__item link">
+                    <img src="icons/navigation links/minor/Notes.svg"/>
+                    <div>Notes</div>
+                </a>
+                <a class="navigation__links__minor__item link">
+                    <img src="icons/navigation links/minor/Friend.svg"/>
+                    <div>Friend</div>
+                </a>
+                <a class="navigation__links__minor__item link">
+                    <img src="icons/navigation links/minor/Photo.svg"/>
+                    <div>Photos</div>
+                </a>
+                <button class="navigation__links__minor__setting-button">
+                    <img class="navigation__links__minor__setting-button__gear" src="icons/navigation links/minor/Settings.svg"/>
+                    <img src="icons/navigation links/minor/Arrow of Settings.svg"/>
+                </button>
+            </article>
+        </section>
+        <section class="navigation__profile-menu">
+            <article class="cheif__profile-stuff__navigation-profile">
+                <div class="cheif__profile-stuff__navigation-profile__major">
+                    <div class="cheif__profile-stuff__navigation-profile__major__item">
+                        <img src="icons/profile section/navigation block/Profile.svg"/>
+                        <div>My Profile</div>
+                    </div>
+                    <div class="cheif__profile-stuff__navigation-profile__major__balance">
+                        <div class="cheif__profile-stuff__navigation-profile__major__balance__left">
+                            <img src="icons/profile section/navigation block/Balance.svg"/>
+                            <div>Balance</div>
+                        </div>
+                        <p>$ 1,430</p>
+                    </div>
+                    <div class="cheif__profile-stuff__navigation-profile__major__connections">
+                        <div class="cheif__profile-stuff__navigation-profile__major__balance__left">
+                            <img src="icons/profile section/navigation block/Connections.svg"/>
+                            <div>Connections</div>
+                        </div>
+                        <p>29</p>
+                    </div>
+                    <div class="cheif__profile-stuff__navigation-profile__major__item">
+                        <img src="icons/profile section/navigation block/Friends.svg"/>
+                        <div>Friends</div>
+                    </div>
+                </div>
+                <div class="cheif__profile-stuff__navigation-profile__minor">
+                    <div class="cheif__profile-stuff__navigation-profile__minor__events">
+                        <div class="cheif__profile-stuff__navigation-profile__minor__events__left">
+                            <img src="icons/profile section/navigation block/Calendar.svg"/>
+                            <div>Events</div>
+                        </div>
+                        <p>45</p>
+                    </div>
+                    <div class="cheif__profile-stuff__navigation-profile__minor__item">
+                        <img src="icons/profile section/navigation block/Settings.svg"/>
+                        <div>Account settings</div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </nav>
+    <main id="root">
+
+    </main>
+</body>
+<script type="module" src="script.js"></script>
+<script src="adaptive.js"></script>
+<script type="module" src="initialization.js"></script>
+</html>
